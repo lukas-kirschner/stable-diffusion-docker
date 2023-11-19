@@ -32,7 +32,8 @@ services:
       - models-controlnet:/data/models/ControlNet
       - models-vae:/data/models/VAE
       - models-embeddings:/data/embeddings
-      - models-esrgan:/data/ESRGAN
+      - models-esrgan:/data/models/ESRGAN
+      - models-wildcards:/wildcards
 
   auto-cpu:
     <<: *automatic
@@ -123,3 +124,10 @@ volumes:
       type: none
       device: ${PWD}/models-esrgan
       o: bind,ro
+  models-wildcards:
+    name: "models-wildcards"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/models-wildcards
+      o: bind,rw

@@ -24,6 +24,21 @@ RE_VALID_OUTDIR = re.compile(r"(^/output(/\.?[\w\-\_]+)+/?$)|(^\s?$)")
 
 DEFAULT_OTHER = {
   "font": "DejaVuSans.ttf",
+  # Show Live Preview Progress
+  "show_progress_every_n_steps": 1,
+  # Only save JPGs when exceeding 64MiB
+  "img_downscale_threshold": 64.0,
+  # Show more Quicksettings
+  "quicksettings_list": [
+        "sd_model_checkpoint",
+        "sd_vae",
+        "CLIP_stop_at_last_layers",
+        "control_net_no_high_res_fix"
+    ],
+  # Whow more HiRes Fix Settings
+  "hires_fix_show_sampler": True,
+  "hires_fix_show_prompts": True,
+  "wildcard_dir": "/wildcards",
 }
 
 def dict_to_json_file(target_file: str, data: dict):

@@ -30,6 +30,8 @@ services:
       - models-lora:/data/models/Lora
       - models-controlnet:/data/models/ControlNet
       - models-vae:/data/models/VAE
+      - models-embeddings:/data/embeddings
+      - models-esrgan:/data/ESRGAN
 
   auto-cpu:
     <<: *automatic
@@ -105,4 +107,18 @@ volumes:
     driver_opts:
       type: none
       device: ${PWD}/models-vae
+      o: bind,ro
+  models-embeddings:
+    name: "models-embeddings"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/models-embeddings
+      o: bind,ro
+  models-esrgan:
+    name: "models-esrgan"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/models-esrgan
       o: bind,ro

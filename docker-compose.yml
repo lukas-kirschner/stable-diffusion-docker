@@ -31,7 +31,6 @@ services:
       - models-lora:/data/models/Lora
       - models-controlnet:/data/models/ControlNet
       - models-vae:/data/models/VAE
-      - models-vae-approx:/data/models/VAE-approx
       - models-embeddings:/data/embeddings
       - models-esrgan:/data/ESRGAN
 
@@ -123,11 +122,4 @@ volumes:
     driver_opts:
       type: none
       device: ${PWD}/models-esrgan
-      o: bind,ro
-  models-vae-approx:
-    name: "models-vae-approx"
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/models-vae-approx
       o: bind,ro

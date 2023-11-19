@@ -1,5 +1,7 @@
 /.cache
+*.pth
 *.safetensors
-*.json
-*.png
 *.ldb
+*.yml
+*.yaml
+*.json

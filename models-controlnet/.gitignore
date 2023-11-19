@@ -1,5 +1,4 @@
 /.cache
+*.yaml
+*.pth
 *.safetensors
-*.json
-*.png
-*.ldb

@@ -3,9 +3,6 @@ version: '3.9'
 x-base_service: &base_service
     ports:
       - "${WEBUI_PORT:-7860}:7860"
-    volumes:
-      - &v1 ./data:/data
-      - &v2 ./output:/output
     stop_signal: SIGKILL
     tty: true
     deploy:
@@ -28,7 +25,11 @@ services:
     environment:
       - CLI_ARGS=--allow-code --xformers --enable-insecure-extension-access --api
     volumes:
-      - models-sd:/models-sd
+      - output:/output
+      - models-sd:/data/models/Stable-diffusion
+      - models-lora:/data/models/Lora
+      - models-controlnet:/data/models/ControlNet
+      - models-vae:/data/models/VAE
 
   auto-cpu:
     <<: *automatic
@@ -70,10 +71,38 @@ services:
       - CLI_ARGS=--cpu
 
 volumes:
+  output:
+    name: "output"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/output
+      o: bind
   models-sd:
     name: "models-sd"
     driver: local
     driver_opts:
       type: none
       device: ${PWD}/models-sd
+      o: bind,ro
+  models-lora:
+    name: "models-lora"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/models-lora
+      o: bind,ro
+  models-controlnet:
+    name: "models-controlnet"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/models-controlnet
+      o: bind,ro
+  models-vae:
+    name: "models-vae"
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/models-vae
       o: bind,ro

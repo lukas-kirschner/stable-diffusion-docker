@@ -65,6 +65,16 @@ services:
     image: sd-comfy:5
     environment:
       - CLI_ARGS=
+    volumes:
+      - output:/output
+      - ./comfyui-data:/data
+      - models-sd:/data/models/Stable-diffusion
+      - models-lora:/data/models/Lora
+      - models-controlnet:/data/models/ControlNet
+      - models-vae:/data/models/VAE
+      - models-embeddings:/data/embeddings
+      - models-esrgan:/data/models/ESRGAN
+      - models-wildcards:/wildcards
 
 
   comfy-cpu:

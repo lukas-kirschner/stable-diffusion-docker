@@ -2,3 +2,4 @@
 *.ldb
 *.safetensors
 *.json
+*.png

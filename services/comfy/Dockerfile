@@ -6,14 +6,14 @@ FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive PIP_PREFER_BINARY=1
 
-RUN apt-get update && apt-get install -y git && apt-get clean
+RUN apt-get update && apt-get install -y git python3-opencv libgl1-mesa-glx python3-numba && apt-get clean
 
 ENV ROOT=/stable-diffusion
 RUN --mount=type=cache,target=/root/.cache/pip \
   git clone https://github.com/comfyanonymous/ComfyUI.git ${ROOT} && \
   cd ${ROOT} && \
   git checkout master && \
-  git reset --hard 884ea653c8d6fe19b3724f45a04a0d74cd881f2f && \
+  git reset --hard 2995a2472541cb10ce9f4934baef9d5993ed3306 && \
   pip install -r requirements.txt
 
 
@@ -30,6 +30,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   git checkout ${BRANCH} && \
   git reset --hard ${SHA} && \
   pip install -r requirements.txt
+
+# Install common dependencies for custom nodes
+RUN pip install matplotlib opencv-python GitPython smmap matrix-client gitdb scikit-image onnxruntime-gpu dynamicprompts Pillow importlib_metadata huggingface_hub scipy filelock einops pyyaml python-dateutil mediapipe svglib fvcore yapf omegaconf ftfy addict numba
 
 # add info
 COPY . /docker/
